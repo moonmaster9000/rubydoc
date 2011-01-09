@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'optiflag'
+require 'rubydoc'
+
+module RubyDocCommand extend OptiFlagSet
+  keyword
+  optional_flag "v"
+  usage_flag "help"
+end
+
+if RubyDocCommand.help?
+  puts <<-HELP
+    rubydoc [gem] [-v VERSION_NUMBER]
+  HELP
+else
+  `open #{RubyDoc.url RubyDocCommand.flags.keyword}`
+end
