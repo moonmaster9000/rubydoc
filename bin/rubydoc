@@ -5,15 +5,17 @@ require 'optiflag'
 require 'rubydoc'
 
 module RubyDocCommand extend OptiFlagSet
-  keyword
-  optional_flag "v"
-  usage_flag "help"
+  optional_flag "v" do
+    long_form "version"
+    description "Specify a specific version of a gem"
+  end
+  optional_switch_flag "f" do
+    long_form "no-frames"
+    description "Don't display the documentation in frames"
+  end
+  extended_help_flag "help"
+
+  and_process!
 end
 
-if RubyDocCommand.help?
-  puts <<-HELP
-    rubydoc [gem] [-v VERSION_NUMBER]
-  HELP
-else
-  `open #{RubyDoc.url RubyDocCommand.flags.keyword}`
-end
+`open #{RubyDoc.url ARGV.first, RubyDocCommand.flags.v, RubyDocCommand.flags.f}`
