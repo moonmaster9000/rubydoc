@@ -6,7 +6,7 @@ It's a gem. Install it.
 
 # Usage
 
-    $ rubydoc [gem] [-v VERSION]
+    $ rubydoc gem_name [-v VERSION or --version VERSION] [-f or --no-frames]
 
 # Requirements
 
